@@ -1,0 +1,230 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8e2nureud7hw"]
+
+[ext_resource type="Script" path="res://shader_scene.gd" id="1_6gl8f"]
+[ext_resource type="Texture2D" uid="uid://ccyty222t8gvw" path="res://Day 2 - UI Blur/CastleWarsBackground.png" id="2_g5joo"]
+[ext_resource type="Script" path="res://Day 2 - UI Blur/ui_blur_controls.gd" id="2_vf6hu"]
+[ext_resource type="Material" uid="uid://c223b5aqbmdk6" path="res://Day 2 - UI Blur/ui_blur_material.tres" id="3_u6b08"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jlgn"]
+font_size = 56
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t422k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_epufm"]
+font_size = 48
+
+[node name="Day 2 - UI Blur" type="Node2D" node_paths=PackedStringArray("next_button", "prev_button", "back_button")]
+script = ExtResource("1_6gl8f")
+scene_index = 2
+next_button = NodePath("CanvasLayer/Controls/Scene Controls/NextButton")
+prev_button = NodePath("CanvasLayer/Controls/Scene Controls/PrevButton")
+back_button = NodePath("CanvasLayer/Controls/Scene Controls/BackButton")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("blur_item", "blur_value_slider", "mix_value_slider", "color_picker")]
+script = ExtResource("2_vf6hu")
+blur_item = NodePath("Demo UI/Blurred Panel")
+blur_value_slider = NodePath("Controls/Shader Controls/VBoxContainer/Blur Amount Slider")
+mix_value_slider = NodePath("Controls/Shader Controls/VBoxContainer/Mix Amount Slider")
+color_picker = NodePath("Controls/Shader Controls/VBoxContainer/ColorPicker")
+
+[node name="Demo UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Demo UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = -123.0
+offset_right = 357.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Demo UI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_g5joo")
+expand_mode = 3
+
+[node name="Blurred Panel" type="Panel" parent="CanvasLayer/Demo UI"]
+material = ExtResource("3_u6b08")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -175.0
+offset_right = 166.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Demo UI/Blurred Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -72.0
+offset_right = 127.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This button does nothing."
+
+[node name="Label" type="Label" parent="CanvasLayer/Demo UI/Blurred Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = 13.0
+offset_right = 87.0
+offset_bottom = 53.0
+grow_horizontal = 2
+text = "Title Text"
+label_settings = SubResource("LabelSettings_4jlgn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Shader Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -205.0
+offset_right = 316.0
+offset_bottom = 269.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -56.5
+offset_right = 173.0
+offset_bottom = 56.5
+grow_vertical = 2
+
+[node name="Blur Amount Slider2" type="Label" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Blur Amount
+"
+
+[node name="Blur Amount Slider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="Mix Amount Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Mix Amount
+"
+
+[node name="Mix Amount Slider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="ColorPicker" type="ColorPicker" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+edit_alpha = false
+sampler_visible = false
+color_modes_visible = false
+hex_visible = false
+presets_visible = false
+
+[node name="Scene Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.0
+offset_top = -108.0
+offset_right = 261.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t422k")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 11.0
+offset_right = 335.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 11.0
+offset_right = 511.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="Title" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.0
+offset_top = 35.0
+offset_right = 261.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t422k")
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Day 2 - UI Blur"
+label_settings = SubResource("LabelSettings_epufm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(546, 330)

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c223b5aqbmdk6"]
+
+[ext_resource type="Shader" uid="uid://cvajcolip5p8i" path="res://Day 2 - UI Blur/ui_blur_shader.tres" id="1_71apy"]
+
+[resource]
+shader = ExtResource("1_71apy")
+shader_parameter/BlurAmount = 0.0
+shader_parameter/MixColor = null
+shader_parameter/MixAmount = 0.5

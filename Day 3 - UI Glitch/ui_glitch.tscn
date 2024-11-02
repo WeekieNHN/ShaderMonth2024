@@ -1,0 +1,201 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0hj88eq5tlfk"]
+
+[ext_resource type="Script" path="res://shader_scene.gd" id="1_ilrxa"]
+[ext_resource type="Script" path="res://Day 3 - UI Glitch/glitch_button.gd" id="2_ulhm3"]
+[ext_resource type="Texture2D" uid="uid://ccyty222t8gvw" path="res://Day 2 - UI Blur/CastleWarsBackground.png" id="3_opqxu"]
+[ext_resource type="Material" uid="uid://b6qknarocudiv" path="res://Day 3 - UI Glitch/ui_glitch_material.tres" id="3_y4nhn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t422k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_epufm"]
+font_size = 48
+
+[node name="Day 3 - UI Glitch" type="Node2D" node_paths=PackedStringArray("next_button", "prev_button", "back_button")]
+script = ExtResource("1_ilrxa")
+scene_index = 3
+next_button = NodePath("CanvasLayer/Controls/Scene Controls/NextButton")
+prev_button = NodePath("CanvasLayer/Controls/Scene Controls/PrevButton")
+back_button = NodePath("CanvasLayer/Controls/Scene Controls/BackButton")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = -123.0
+offset_right = 357.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Controls/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_opqxu")
+expand_mode = 3
+
+[node name="Shader Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = -21.0
+offset_right = 208.0
+offset_bottom = 85.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -56.5
+offset_right = 173.0
+offset_bottom = 56.5
+grow_vertical = 2
+
+[node name="Blur Amount Slider2" type="Label" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Blur Amount
+"
+
+[node name="Blur Amount Slider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="Mix Amount Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Mix Amount
+"
+
+[node name="Mix Amount Slider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Scene Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.0
+offset_top = -108.0
+offset_right = 261.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t422k")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 11.0
+offset_right = 335.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 11.0
+offset_right = 511.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="Title" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.0
+offset_top = 35.0
+offset_right = 261.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t422k")
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Day 3 - UI Glitch"
+label_settings = SubResource("LabelSettings_epufm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Demo Panel" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -181.0
+offset_right = 178.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GlitchButton" type="Button" parent="CanvasLayer/Controls/Demo Panel" node_paths=PackedStringArray("glitch_panel")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -45.0
+offset_right = 95.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This is a button"
+script = ExtResource("2_ulhm3")
+glitch_panel = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Controls/Demo Panel/GlitchButton"]
+material = ExtResource("3_y4nhn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 325)

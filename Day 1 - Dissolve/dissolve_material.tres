@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b46yp5ysaa7jq"]
+
+[ext_resource type="Shader" uid="uid://dfk0me6gvh7jx" path="res://Day 1 - Dissolve/dissolve_shader.tres" id="1_1bpes"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1bpes")
+shader_parameter/BaseColor = Color(0.190762, 0.190762, 0.190762, 1)
+shader_parameter/DissolveHeight = 0.6
+shader_parameter/NoiseScale = 0.1
+shader_parameter/NoiseSize = 20.0
+shader_parameter/GlowThickness = 0.05
+shader_parameter/EdgeGlowColor = Color(0, 0.619, 5.946, 1)

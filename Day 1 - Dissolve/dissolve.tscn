@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=3 uid="uid://b5505oyhkodyu"]
+
+[ext_resource type="Script" path="res://shader_scene.gd" id="1_nwyv6"]
+[ext_resource type="Material" uid="uid://b46yp5ysaa7jq" path="res://Day 1 - Dissolve/dissolve_material.tres" id="1_wrykf"]
+[ext_resource type="Script" path="res://Day 1 - Dissolve/dissolve_functions.gd" id="2_17j0x"]
+[ext_resource type="Script" path="res://Day 1 - Dissolve/dissolve_controls.gd" id="3_6nfd8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mqre7"]
+material = ExtResource("1_wrykf")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tldcw"]
+
+[sub_resource type="Sky" id="Sky_mf2s7"]
+sky_material = SubResource("ProceduralSkyMaterial_tldcw")
+
+[sub_resource type="Environment" id="Environment_puotk"]
+background_mode = 2
+sky = SubResource("Sky_mf2s7")
+glow_enabled = true
+glow_intensity = 2.74
+glow_strength = 1.04
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jlbhb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ruuf2"]
+font_size = 48
+
+[node name="Day 1 - Dissolve" type="Node3D" node_paths=PackedStringArray("next_button", "prev_button", "back_button")]
+script = ExtResource("1_nwyv6")
+next_button = NodePath("CanvasLayer/Controls/Scene Controls/NextButton")
+prev_button = NodePath("CanvasLayer/Controls/Scene Controls/PrevButton")
+back_button = NodePath("CanvasLayer/Controls/Scene Controls/BackButton")
+
+[node name="DissolveSphere" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_mqre7")
+script = ExtResource("2_17j0x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.220672, 2.07869)
+environment = SubResource("Environment_puotk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("dissolve_item", "dissolve_in_button", "dissolve_out_button", "dissolve_value_slider")]
+script = ExtResource("3_6nfd8")
+dissolve_item = NodePath("../DissolveSphere")
+dissolve_in_button = NodePath("Controls/Shader Controls/VBoxContainer/DissolveInButton")
+dissolve_out_button = NodePath("Controls/Shader Controls/VBoxContainer/DissolveOutButton")
+dissolve_value_slider = NodePath("Controls/Shader Controls/VBoxContainer/SetDissolveHeightSlider")
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Shader Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -63.0
+offset_right = 190.0
+offset_bottom = 63.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -56.5
+offset_right = 173.0
+offset_bottom = 56.5
+grow_vertical = 2
+
+[node name="DissolveInButton" type="Button" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Dissolve In"
+
+[node name="DissolveOutButton" type="Button" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Dissolve Out"
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Dissolve Height"
+
+[node name="SetDissolveHeightSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Scene Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.0
+offset_top = -108.0
+offset_right = 261.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jlbhb")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 11.0
+offset_right = 335.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 11.0
+offset_right = 511.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="Title" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.0
+offset_top = 35.0
+offset_right = 261.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jlbhb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Day 1 - Dissolve"
+label_settings = SubResource("LabelSettings_ruuf2")
+horizontal_alignment = 1
+vertical_alignment = 1
