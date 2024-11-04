@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cyn5cl4pnabfn"]
+
+[ext_resource type="Shader" uid="uid://brq10laeg05kr" path="res://Day 3 - Fade By Distance/fade_by_distance_from_character.tres" id="1_hkafj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_hkafj")
+shader_parameter/BaseColor = Color(1, 0.498039, 0.145098, 1)
+shader_parameter/FadeDistance = 20.0
+shader_parameter/CharacterPosition = null

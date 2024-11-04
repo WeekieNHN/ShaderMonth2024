@@ -1,0 +1,182 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwbacg5iltgg2"]
+
+[ext_resource type="Material" uid="uid://cyn5cl4pnabfn" path="res://Day 3 - Fade By Distance/fade_by_distance.tres" id="1_2oa50"]
+[ext_resource type="Script" path="res://shader_scene.gd" id="1_hh018"]
+[ext_resource type="Script" path="res://Day 3 - Fade By Distance/fade_object.gd" id="2_1l8g0"]
+[ext_resource type="Script" path="res://Day 3 - Fade By Distance/fake_player.gd" id="3_imjmx"]
+[ext_resource type="Script" path="res://Day 3 - Fade By Distance/fade_by_distance_controls.gd" id="5_gd5oo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b1okq"]
+material = ExtResource("1_2oa50")
+size = Vector3(20, 1, 2)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ec3xa"]
+
+[sub_resource type="Sky" id="Sky_w427e"]
+sky_material = SubResource("ProceduralSkyMaterial_ec3xa")
+
+[sub_resource type="Environment" id="Environment_e80ga"]
+background_mode = 2
+sky = SubResource("Sky_w427e")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfw2p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5yh0w"]
+font_size = 48
+
+[node name="Day 3 - Fade By Distance" type="Node3D" node_paths=PackedStringArray("next_button", "prev_button", "back_button")]
+script = ExtResource("1_hh018")
+scene_index = 3
+next_button = NodePath("CanvasLayer/Controls/Scene Controls/NextButton")
+prev_button = NodePath("CanvasLayer/Controls/Scene Controls/PrevButton")
+back_button = NodePath("CanvasLayer/Controls/Scene Controls/BackButton")
+
+[node name="FadeOutItem" type="MeshInstance3D" parent="." node_paths=PackedStringArray("character")]
+mesh = SubResource("BoxMesh_b1okq")
+script = ExtResource("2_1l8g0")
+character = NodePath("../_Character_")
+
+[node name="_Character_" type="CSGSphere3D" parent="." node_paths=PackedStringArray("marker_parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_imjmx")
+marker_parent = NodePath("../Markers")
+speed = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.967268, 0.253758, 0, -0.253758, 0.967268, 0, 3.5, 5)
+environment = SubResource("Environment_e80ga")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.872828, 0.488027, 0, -0.488027, 0.872828, 0, 0, 0)
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.009, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.009, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("fade_out_item", "lose_vision_button", "temp_vision_button", "vision_slider")]
+script = ExtResource("5_gd5oo")
+fade_out_item = NodePath("../FadeOutItem")
+lose_vision_button = NodePath("Controls/Shader Controls/VBoxContainer/LoseVisionButton")
+temp_vision_button = NodePath("Controls/Shader Controls/VBoxContainer/TempVisionButton")
+vision_slider = NodePath("Controls/Shader Controls/VBoxContainer/SetVisionSlider")
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Shader Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -63.0
+offset_right = 190.0
+offset_bottom = 63.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -56.5
+offset_right = 173.0
+offset_bottom = 56.5
+grow_vertical = 2
+
+[node name="LoseVisionButton" type="Button" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Lose Vision"
+
+[node name="TempVisionButton" type="Button" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Gain Temp Vision"
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+text = "Vision"
+
+[node name="SetVisionSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+step = 0.01
+value = 20.0
+
+[node name="Scene Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.0
+offset_top = -108.0
+offset_right = 261.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nfw2p")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 11.0
+offset_right = 335.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 11.0
+offset_right = 511.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="Title" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.0
+offset_top = 35.0
+offset_right = 261.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nfw2p")
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Day 3 - Vision (Fade By Distance)"
+label_settings = SubResource("LabelSettings_5yh0w")
+horizontal_alignment = 1
+vertical_alignment = 1
