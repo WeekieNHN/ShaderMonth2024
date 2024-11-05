@@ -13,7 +13,8 @@ func _ready() -> void:
 	scenes_to_load[2]			= "res://Day 2 - UI Blur/ui_blur.tscn"
 	scenes_to_load[3]			= "res://Day 3 - Fade By Distance/fade_by_distance.tscn"
 	scenes_to_load[4]			= "res://Day 4 - Chromatic Aberration/chromatic abberation.tscn"
-
+	scenes_to_load[5]			= "res://Day 5 - Censor/censor.tscn"
+	
 func contains(index: int) -> bool:
 	return scenes_to_load.has(index)
 

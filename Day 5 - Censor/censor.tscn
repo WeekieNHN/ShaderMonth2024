@@ -1,0 +1,252 @@
+[gd_scene load_steps=18 format=3 uid="uid://dldm0qrrn2ffr"]
+
+[ext_resource type="Script" path="res://shader_scene.gd" id="1_73nj6"]
+[ext_resource type="Material" uid="uid://binejdstri5yo" path="res://Day 5 - Censor/censor_material.tres" id="1_kxw80"]
+[ext_resource type="Script" path="res://Day 5 - Censor/censor_settings.gd" id="2_5geuf"]
+[ext_resource type="Material" uid="uid://byd4bmg4gbddh" path="res://Day 5 - Censor/Scene Materials/visor.tres" id="2_d3p1q"]
+[ext_resource type="Script" path="res://Day 5 - Censor/censor_rotator.gd" id="3_baeye"]
+[ext_resource type="Script" path="res://Day 5 - Censor/censor.gd" id="4_khbpe"]
+[ext_resource type="AudioStream" uid="uid://b3fxpp03d0hpp" path="res://Day 5 - Censor/1khz.wav" id="5_xqseg"]
+[ext_resource type="AudioStream" uid="uid://qsaw3oou1cio" path="res://Day 5 - Censor/animal crossing audio.wav" id="6_p0p38"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kifei"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_whj75"]
+font_size = 48
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 600
+shadow_color = Color(0.136826, 0.136826, 0.136826, 0)
+shadow_offset = Vector2(3.665, 2.19)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_evvj0"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4qk6r"]
+material = ExtResource("1_kxw80")
+size = Vector2(0.5, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dlmcb"]
+size = Vector3(0.5, 0.25, 0.2)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tldcw"]
+
+[sub_resource type="Sky" id="Sky_mf2s7"]
+sky_material = SubResource("ProceduralSkyMaterial_tldcw")
+
+[sub_resource type="Environment" id="Environment_xk77u"]
+background_mode = 2
+sky = SubResource("Sky_mf2s7")
+glow_enabled = true
+glow_intensity = 2.74
+glow_strength = 1.04
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ys130"]
+size = Vector2(50, 50)
+
+[node name="Censor" type="Node3D" node_paths=PackedStringArray("next_button", "prev_button", "back_button")]
+script = ExtResource("1_73nj6")
+scene_index = 5
+next_button = NodePath("CanvasLayer/Controls/Scene Controls/NextButton")
+prev_button = NodePath("CanvasLayer/Controls/Scene Controls/PrevButton")
+back_button = NodePath("CanvasLayer/Controls/Scene Controls/BackButton")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("censor_quad", "pixel_size_slider", "enable_audio_button")]
+script = ExtResource("2_5geuf")
+censor_quad = NodePath("../Character/Head/Eye/CensorQuad")
+pixel_size_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Pixel Size/HSlider")
+enable_audio_button = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Audio/CheckButton")
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Shader Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -91.0
+offset_right = 311.0
+offset_bottom = 155.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Controls/Shader Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer"]
+layout_mode = 2
+
+[node name="Vignette Settings" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="Pixel Size" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Pixel Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pixel Size
+"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Pixel Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 256.0
+step = 2.0
+value = 40.0
+rounded = true
+
+[node name="Audio" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Audio
+"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Audio"]
+layout_mode = 2
+
+[node name="Scene Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.0
+offset_top = -108.0
+offset_right = 261.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kifei")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 11.0
+offset_right = 335.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 11.0
+offset_right = 511.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="Title" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.0
+offset_top = 35.0
+offset_right = 261.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kifei")
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Day 5 -  Censor (Mosaic)"
+label_settings = SubResource("LabelSettings_whj75")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Character" type="Node3D" parent="."]
+transform = Transform3D(0.970296, 0, -0.241922, 0, 1, 0, 0.241922, 0, 0.970296, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Character"]
+mesh = SubResource("CapsuleMesh_evvj0")
+
+[node name="Head" type="Node3D" parent="Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.567, 0)
+script = ExtResource("3_baeye")
+min_rotation = -15.0
+max_rotation = 15.0
+rotation_speed = 20.0
+
+[node name="Eye" type="Node3D" parent="Character/Head"]
+script = ExtResource("3_baeye")
+min_rotation = -15.0
+max_rotation = 15.0
+rotation_axis = Vector3(1, 0, 0)
+rotation_speed = 20.0
+
+[node name="CensorQuad" type="MeshInstance3D" parent="Character/Head/Eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107995, 0.58856)
+mesh = SubResource("QuadMesh_4qk6r")
+skeleton = NodePath("../..")
+script = ExtResource("4_khbpe")
+
+[node name="Timer" type="Timer" parent="Character/Head/Eye/CensorQuad"]
+
+[node name="CensorAudioStreamPlayer" type="AudioStreamPlayer" parent="Character/Head/Eye/CensorQuad"]
+stream = ExtResource("5_xqseg")
+volume_db = -25.0
+
+[node name="TalkingAudioStreamPlayer" type="AudioStreamPlayer" parent="Character/Head/Eye/CensorQuad"]
+stream = ExtResource("6_p0p38")
+volume_db = -8.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Character/Head/Eye"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.457229)
+material_override = ExtResource("2_d3p1q")
+mesh = SubResource("BoxMesh_dlmcb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.67, 0.58, 1.565)
+environment = SubResource("Environment_xk77u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("PlaneMesh_ys130")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.332869, 0.942973, 0, -0.942973, 0.332869, 0, 0, 0)

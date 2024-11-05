@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://binejdstri5yo"]
+
+[ext_resource type="Shader" path="res://Day 5 - Censor/censor_shader.gdshader" id="1_vsfwh"]
+
+[resource]
+render_priority = -5
+shader = ExtResource("1_vsfwh")
+shader_parameter/pixel_size = 40
