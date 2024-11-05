@@ -1,0 +1,298 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4akdoi3r5qus"]
+
+[ext_resource type="Script" path="res://shader_scene.gd" id="1_41wea"]
+[ext_resource type="Script" path="res://Day 4 - Chromatic Aberration/abberation_controls.gd" id="2_eejrs"]
+[ext_resource type="Texture2D" uid="uid://cf18e5ygx8rrb" path="res://Day 4 - Chromatic Aberration/gnorp.jpg" id="3_f0jib"]
+[ext_resource type="Material" uid="uid://b06yy2f6ej7p8" path="res://Day 4 - Chromatic Aberration/chromatic_abberation_material.tres" id="3_nt7hk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t422k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_epufm"]
+font_size = 48
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 600
+shadow_color = Color(0.136826, 0.136826, 0.136826, 0)
+shadow_offset = Vector2(3.665, 2.19)
+
+[node name="Day 4 - Chromatic Abberation" type="Node2D" node_paths=PackedStringArray("next_button", "prev_button", "back_button")]
+script = ExtResource("1_41wea")
+scene_index = 4
+next_button = NodePath("CanvasLayer/Controls/Scene Controls/NextButton")
+prev_button = NodePath("CanvasLayer/Controls/Scene Controls/PrevButton")
+back_button = NodePath("CanvasLayer/Controls/Scene Controls/BackButton")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("width_slider", "height_slider", "fade_slider", "red_slider", "green_slider", "blue_slider", "abberation_panel")]
+script = ExtResource("2_eejrs")
+width_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Width/HSlider")
+height_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Height/HSlider")
+fade_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Fade/HSlider")
+red_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Red/HSlider")
+green_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Green/HSlider")
+blue_slider = NodePath("Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Blue/HSlider")
+abberation_panel = NodePath("Demo UI/HBoxContainer2/AbberationPanel")
+
+[node name="Demo UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Demo UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = -123.0
+offset_right = 357.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Demo UI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_f0jib")
+expand_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Demo UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = -123.0
+offset_right = 357.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="AbberationPanel" type="Panel" parent="CanvasLayer/Demo UI/HBoxContainer2"]
+material = ExtResource("3_nt7hk")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controls" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Shader Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -91.0
+offset_right = 311.0
+offset_bottom = 155.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Controls/Shader Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer"]
+layout_mode = 2
+
+[node name="Vignette Settings" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+text = "Vignette Settings
+"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="Width" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Width"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Width
+"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Width"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Height" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Height"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Height
+"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Height"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.7
+
+[node name="Fade" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Fade"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fade"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Vignette Settings/Fade"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.7
+
+[node name="Color Settings" type="VBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings"]
+layout_mode = 2
+text = "Color Settings
+"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings"]
+layout_mode = 2
+
+[node name="Red" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Red"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Red"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Red"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 5.0
+step = 0.25
+value = 1.0
+
+[node name="Green" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Green"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Green"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Green"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 5.0
+step = 0.25
+value = 1.0
+
+[node name="Blue" type="HBoxContainer" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Blue"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blue"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Controls/Shader Controls/MarginContainer/VBoxContainer/Color Settings/Blue"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 5.0
+step = 0.25
+value = 1.0
+
+[node name="Scene Controls" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.0
+offset_top = -108.0
+offset_right = 261.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t422k")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 11.0
+offset_right = 335.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="NextButton" type="Button" parent="CanvasLayer/Controls/Scene Controls"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 11.0
+offset_right = 511.0
+offset_bottom = 76.0
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="Title" type="Panel" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -261.0
+offset_top = 35.0
+offset_right = 261.0
+offset_bottom = 102.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t422k")
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Day 4 -  Chromatic Abberation"
+label_settings = SubResource("LabelSettings_epufm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(546, 330)

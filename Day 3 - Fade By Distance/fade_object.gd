@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	material.set_shader_parameter("CharacterPosition", character.global_position)
 
 func set_vision_value(value: float) -> void:

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="ShaderMonthLocal"
+config/name="ShaderMonthPublic"
 run/main_scene="res://base_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"

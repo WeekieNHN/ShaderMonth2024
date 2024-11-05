@@ -6,5 +6,5 @@
 render_priority = 0
 shader = ExtResource("1_hkafj")
 shader_parameter/BaseColor = Color(1, 0.498039, 0.145098, 1)
-shader_parameter/FadeDistance = 20.0
+shader_parameter/FadeDistance = 3.935
 shader_parameter/CharacterPosition = null

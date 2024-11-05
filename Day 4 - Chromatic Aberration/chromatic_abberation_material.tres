@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b06yy2f6ej7p8"]
+
+[ext_resource type="Shader" uid="uid://c8xi7xxkaewyh" path="res://Chromatic Aberration/chromatic_abberation.tres" id="1_fk6eo"]
+
+[resource]
+shader = ExtResource("1_fk6eo")
+shader_parameter/RedDisplacement = Vector2(1, 0)
+shader_parameter/GreenDisplacement = Vector2(0, 1)
+shader_parameter/BlueDisplacement = Vector2(-1, 0)
+shader_parameter/Width = 0.5
+shader_parameter/Height = 0.7
+shader_parameter/Fade = 0.7
